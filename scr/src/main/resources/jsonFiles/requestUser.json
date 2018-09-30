@@ -1,0 +1,5 @@
+{
+  "send": "code",
+  "connection": "email",
+  "email": "{{email}}"
+}

@@ -125,8 +125,33 @@ public class JsonUtil {
 			// String request = objectMapper.writeValueAsString(object);
 			logger.info("Request String:" + object);
 
-			response = given().contentType("application/json").body(object)
-					.when().post();
+			response = given().contentType("application/json").body(object).when().post();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		logger.info("Response String:" + response.asString());
+		parseToMap(response.asString());
+		SoftAssert softAssert = new SoftAssert();
+		softAssert.andThat(expStatusCode, response.getStatusCode(),
+				object.toString(), response.asString());
+		softAssert.assertAll();
+		return response;
+	}
+
+	public Response postRequestWithAuth(String object, String api,
+			String expStatusCode, String authToken) {
+
+		RestAssured.baseURI = baseUrl + api;
+
+		Response response = null;
+		try {
+			// String request = objectMapper.writeValueAsString(object);
+			logger.info("Request String:" + object);
+
+			response = given().contentType("application/json")
+					.header("Authorization", authToken).body(object).when().post();
 
 		} catch (Exception e) {
 

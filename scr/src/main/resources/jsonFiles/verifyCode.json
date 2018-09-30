@@ -1,0 +1,5 @@
+{
+  "connection": "email",
+  "email": "{{email}}",
+  "code": "804478"
+}

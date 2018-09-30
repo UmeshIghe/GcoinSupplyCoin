@@ -1,0 +1,5 @@
+{
+	"name": "{{userName}}",
+	"email": "{{email}}",
+	"role": "user"
+}

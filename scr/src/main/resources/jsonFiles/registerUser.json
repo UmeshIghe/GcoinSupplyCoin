@@ -1,0 +1,5 @@
+{
+  "password": "Welcome@123",
+  "email": "{{email}}",
+  "name": "{{userName}}"
+}
