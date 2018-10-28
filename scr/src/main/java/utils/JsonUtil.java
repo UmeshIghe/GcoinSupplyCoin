@@ -16,6 +16,7 @@ import java.util.Map;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 //import org.apache.log4j.Logger;
@@ -125,7 +126,8 @@ public class JsonUtil {
 			// String request = objectMapper.writeValueAsString(object);
 			logger.info("Request String:" + object);
 
-			response = given().contentType("application/json").body(object).when().post();
+			response = given().contentType("application/json").body(object)
+					.when().post();
 
 		} catch (Exception e) {
 
@@ -151,7 +153,8 @@ public class JsonUtil {
 			logger.info("Request String:" + object);
 
 			response = given().contentType("application/json")
-					.header("Authorization", authToken).body(object).when().post();
+					.header("Authorization", authToken).body(object).when()
+					.post();
 
 		} catch (Exception e) {
 
@@ -260,18 +263,19 @@ public class JsonUtil {
 			}
 
 			docCtx = JsonPath.parse(obj);
-			if ("REMOVE".equalsIgnoreCase(updateValue)) {
-				docCtx.delete(wildCard.concat(updateKey));
-			} else {
-				logger.info("Field to Update: ".concat(updateKey).concat("=")
-						.concat(updateValue));
-				docCtx.set(wildCard.concat(updateKey), updateValue);
-				jsonPath = JsonPath.compile(wildCard.concat(updateKey));
-				String updatedField = docCtx.read(jsonPath).toString();
-				logger.info("Field Updated :".concat(updateKey).concat("=")
-						.concat(updatedField));
+			if (!fieldName.equals(StringUtils.EMPTY)) {
+				if ("REMOVE".equalsIgnoreCase(updateValue)) {
+					docCtx.delete(wildCard.concat(updateKey));
+				} else {
+					logger.info("Field to Update: ".concat(updateKey)
+							.concat("=").concat(updateValue));
+					docCtx.set(wildCard.concat(updateKey), updateValue);
+					jsonPath = JsonPath.compile(wildCard.concat(updateKey));
+					String updatedField = docCtx.read(jsonPath).toString();
+					logger.info("Field Updated :".concat(updateKey).concat("=")
+							.concat(updatedField));
+				}
 			}
-
 			jsonPath = JsonPath.compile("$");
 
 		} catch (Exception e) {
@@ -282,6 +286,7 @@ public class JsonUtil {
 					+ " field to update, please correct jsonFile", null);
 
 		}
+
 		return docCtx.read(jsonPath).toString();
 	}
 
