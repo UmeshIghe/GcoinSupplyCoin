@@ -45,7 +45,7 @@ public class CommomSteps {
 	//
 	// }
 
-//	@When("^user send a post request to \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send a post request to \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_a_post_request_to_and_expects_statusCode(
 			String endPoint, String statusCode) {
 		System.out.println("Sending request to : " + endPoint);
@@ -53,7 +53,7 @@ public class CommomSteps {
 				reqResParams.getUpdatedReq(), endPoint, statusCode));
 	}
 
-//	@Then("^save value of parameter from json \"([^\"]*)\"$")
+	// @Then("^save value of parameter from json \"([^\"]*)\"$")
 	public void validate_response_message_for(String params) {
 		System.out.println(reqResParams.getResponse().jsonPath()
 				.getString(params));
@@ -64,7 +64,7 @@ public class CommomSteps {
 				.getString(params));
 	}
 
-//	@Then("^save value of parameter from json \"([^\"]*)\" to field \"([^\"]*)\"$")
+	// @Then("^save value of parameter from json \"([^\"]*)\" to field \"([^\"]*)\"$")
 	public void save_value_of_parameter_from_json(String params,
 			String fieldName) {
 		System.out.println("from Json "
@@ -81,7 +81,7 @@ public class CommomSteps {
 		// .getString(params));
 	}
 
-//	@When("^user send get request to api \"([^\"]*)\" with authId as header and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send get request to api \"([^\"]*)\" with authId as header and expects statusCode \"([^\"]*)\"$")
 	public void user_send_get_request_to_api_with_authId_as_header_and_expects_statusCode(
 			String endPoint, String statusCode) {
 		System.out.println("Sending request to : " + endPoint);
@@ -89,7 +89,7 @@ public class CommomSteps {
 				reqResParams.getJwtAuth()));
 	}
 
-//	@When("^user send get request to api \"([^\"]*)\" with authId as header with updated request parameter \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send get request to api \"([^\"]*)\" with authId as header with updated request parameter \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_get_request_to_api_with_authId_as_header_with_parameter_and_expects_statusCode(
 			String endPoint, String reqParam, String statusCode) {
 		endPoint = endPoint + "/"
@@ -99,9 +99,9 @@ public class CommomSteps {
 				reqResParams.getJwtAuth()));
 	}
 
-//	@When("^user send request to invite new user using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send request to invite new user using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_inviteUser(String jsonFileName, String endPoint,
-			String statusCode) {
+			String statusCode, String userType) {
 		System.out.println("Sending request to : " + endPoint);
 		endPoint = endPoint
 				+ "/"
@@ -116,6 +116,8 @@ public class CommomSteps {
 				jsonFileName, "email", emailId);
 		updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
 				updatedRequest, "name", userName);
+		updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
+				updatedRequest, "role", userType);
 		reqResParams.setUpdatedReq(updatedRequest);
 
 		reqResParams.setResponse(jsonUtil.postRequestWithAuth(
@@ -123,7 +125,7 @@ public class CommomSteps {
 				reqResParams.getJwtAuth()));
 	}
 
-//	@When("^user send request to request code api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send request to request code api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_a_post_request_To_requestcode_api_and_expects_statusCode(
 			String jsonFileName, String endPoint, String statusCode) {
 		System.out.println("Sending request to : " + endPoint);
@@ -140,7 +142,7 @@ public class CommomSteps {
 				+ reqResParams.getVerificationCode());
 	}
 
-//	@When("^user send request to verify code api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send request to verify code api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_request_to_verify_code_api(String jsonFileName,
 			String endPoint, String statusCode) {
 		System.out.println("Sending request to : " + endPoint);
@@ -159,7 +161,7 @@ public class CommomSteps {
 
 	}
 
-//	@When("^user send request to registerUser api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send request to registerUser api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_request_to_registerUser_api(String jsonFileName,
 			String endPoint, String statusCode) {
 		System.out.println("Sending request to : " + endPoint);
@@ -178,7 +180,7 @@ public class CommomSteps {
 
 	}
 
-//	@When("^user send request to get user invite api \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send request to get user invite api \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_request_to_get_user_invite_api(String endPoint,
 			String statusCode) {
 		endPoint = endPoint.replace("{{user_id}}", reqResParams.getUserId());
@@ -189,7 +191,7 @@ public class CommomSteps {
 
 	}
 
-//	@When("^user send request to invitation api \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
+	// @When("^user send request to invitation api \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_request_to_invitation_api(String endPoint,
 			String statusCode) {
 		endPoint = endPoint.replace("{{user_id}}", reqResParams.getUserId());
