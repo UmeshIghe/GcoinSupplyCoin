@@ -93,7 +93,7 @@ public class ReflectionUtils {
 	public static Object getClass(String className) {
 
 		try {
-			Class<?> clazz = Class.forName("com.mastercard.requests."
+			Class<?> clazz = Class.forName("apiRequests."
 					+ className);
 
 			return clazz.newInstance();
