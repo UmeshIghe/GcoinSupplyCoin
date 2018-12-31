@@ -38,7 +38,8 @@ public class CommomStepsNew {
 			String apiClassName) {
 
 		String updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
-				getRequestObjectMapper(apiClassName), StringUtils.EMPTY, StringUtils.EMPTY);
+				getRequestObjectMapper(apiClassName), StringUtils.EMPTY,
+				StringUtils.EMPTY);
 		reqResParams.setUpdatedReq(updatedRequest);
 	}
 
@@ -110,10 +111,12 @@ public class CommomStepsNew {
 	public void user_send_inviteUser(String apiClassName, String endPoint,
 			String statusCode, String userType) {
 		System.out.println("Sending request to : " + endPoint);
+
 		endPoint = endPoint
 				+ "/"
 				+ ReflectionUtils.getRequestField(reqResParams,
 						"organizationid") + "/user";
+
 		String tempName = DateUtils.getDateTimeDDMMYYHHMMSS();
 		String emailId = "Scrinviteuser+" + tempName + "@gmail.com";
 		reqResParams.setEmailId(emailId);
@@ -132,13 +135,43 @@ public class CommomStepsNew {
 				reqResParams.getJwtAuth()));
 	}
 
+	public void user_send_inviteOrg(String apiClassName, String endPoint,
+			String statusCode, String orgType) {
+		System.out.println("Sending request to : " + endPoint);
+
+		String tempName = DateUtils.getDateTimeDDMMYYHHMMSS();
+		String emailId = "Scrinviteuser+" + tempName + "@gmail.com";
+		reqResParams.setEmailId(emailId);
+		String userName = "";
+		if (orgType.contains("Refiner")) {
+			userName = "Refiner" + tempName;
+		} else {
+			userName = "Miner" + tempName;
+		}
+
+		reqResParams.setUserName(userName);
+		String updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
+				getRequestObjectMapper(apiClassName),
+				"invited_members[0].email", emailId);
+		updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
+				updatedRequest, "name", userName);
+		updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
+				updatedRequest, "type", orgType);
+		reqResParams.setUpdatedReq(updatedRequest);
+
+		reqResParams.setResponse(jsonUtil.postRequestWithAuth(
+				reqResParams.getUpdatedReq(), endPoint, statusCode,
+				reqResParams.getJwtAuth()));
+	}
+
 	// @When("^user send request to request code api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")
 	public void user_send_a_post_request_To_requestcode_api_and_expects_statusCode(
 			String apiClassName, String endPoint, String statusCode) {
 		System.out.println("Sending request to : " + endPoint);
 
 		String updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
-				getRequestObjectMapper(apiClassName), "email", reqResParams.getEmailId());
+				getRequestObjectMapper(apiClassName), "email",
+				reqResParams.getEmailId());
 		reqResParams.setUpdatedReq(updatedRequest);
 		reqResParams.setResponse(jsonUtil.postRequestWithAuth(
 				reqResParams.getUpdatedReq(), endPoint, statusCode,
@@ -155,7 +188,8 @@ public class CommomStepsNew {
 		System.out.println("Sending request to : " + endPoint);
 
 		String updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
-				getRequestObjectMapper(apiClassName), "email", reqResParams.getEmailId());
+				getRequestObjectMapper(apiClassName), "email",
+				reqResParams.getEmailId());
 
 		updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
 				updatedRequest, "code", reqResParams.getVerificationCode());
@@ -174,7 +208,8 @@ public class CommomStepsNew {
 		System.out.println("Sending request to : " + endPoint);
 
 		String updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
-				getRequestObjectMapper(apiClassName), "email", reqResParams.getEmailId());
+				getRequestObjectMapper(apiClassName), "email",
+				reqResParams.getEmailId());
 
 		updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
 				updatedRequest, "name", reqResParams.getUserName());
@@ -211,7 +246,7 @@ public class CommomStepsNew {
 
 	}
 
-	String getRequestObjectMapper(String apiClassName) {
+	public String getRequestObjectMapper(String apiClassName) {
 		Object obj = ReflectionUtils.getClass(apiClassName);
 		try {
 			return objectMapper.writeValueAsString(obj);
