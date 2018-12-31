@@ -52,7 +52,9 @@ public class InviteUserFlowNew {
 
 	@DataProvider(name = "orgType")
 	public static Object[][] orgType() {
-		return new Object[][] { { "InviteOrg", "Refiner Operator" } };
+		return new Object[][] { { "InviteOrg", "Refiner Operator" },
+				{ "InviteOrg", "Miner Operator" },
+				{ "InviteOrg", "Logistic Operator" }, { "InviteOrg", "Vault" } };
 	}
 
 	@Test(dataProvider = "orgType")
@@ -70,8 +72,7 @@ public class InviteUserFlowNew {
 				"organization", "organizationid", "200");
 		// used parametrization here , fileName and usertype is passed using
 		// data provider
-		steps.user_send_inviteOrg(apiClassName, "organization", "201",
-				userType);
+		steps.user_send_inviteOrg(apiClassName, "organization", "201", userType);
 		steps.user_send_a_post_request_To_requestcode_api_and_expects_statusCode(
 				"RequestUser", "passwordless/start", "201");
 		steps.user_send_request_to_verify_code_api("VerifyCode", "oauth/ro",

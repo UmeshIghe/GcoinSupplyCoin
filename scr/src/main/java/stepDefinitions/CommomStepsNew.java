@@ -140,13 +140,24 @@ public class CommomStepsNew {
 		System.out.println("Sending request to : " + endPoint);
 
 		String tempName = DateUtils.getDateTimeDDMMYYHHMMSS();
-		String emailId = "Scrinviteuser+" + tempName + "@gmail.com";
-		reqResParams.setEmailId(emailId);
+		String emailId = "";
 		String userName = "";
 		if (orgType.contains("Refiner")) {
 			userName = "Refiner" + tempName;
-		} else {
+			emailId = "Scrinviteuser+" + userName + "@gmail.com";
+			reqResParams.setRefineremailId(emailId);
+		} else if (orgType.contains("Miner")) {
 			userName = "Miner" + tempName;
+			emailId = "Scrinviteuser+" + userName + "@gmail.com";
+			reqResParams.setMineremailId(emailId);
+		} else if (orgType.contains("Logistic")) {
+			userName = "Logistic" + tempName;
+			emailId = "Scrinviteuser+" + userName + "@gmail.com";
+			reqResParams.setLogisticemailId(emailId);
+		} else {
+			userName = "Vault" + tempName;
+			emailId = "Scrinviteuser+" + userName + "@gmail.com";
+			reqResParams.setVaultemailId(emailId);
 		}
 
 		reqResParams.setUserName(userName);
@@ -162,6 +173,32 @@ public class CommomStepsNew {
 		reqResParams.setResponse(jsonUtil.postRequestWithAuth(
 				reqResParams.getUpdatedReq(), endPoint, statusCode,
 				reqResParams.getJwtAuth()));
+		System.out.println("Setting of Org ids");
+		if (orgType.contains("Refiner")) {
+
+			reqResParams.setRefinerOrgId(jsonUtil.extractValue(reqResParams
+					.getResponse().body().asString(),
+					"organization.organization_id"));
+			System.out.println("Setting of Org id for Refiner: "+reqResParams.getRefinerOrgId());
+		} else if (orgType.contains("Miner")) {
+
+			reqResParams.setMinerOrgId(jsonUtil.extractValue(reqResParams
+					.getResponse().body().asString(),
+					"organization.organization_id"));
+			System.out.println("Setting of Org id for Miner: "+reqResParams.getMinerOrgId());
+		} else if (orgType.contains("Logistic")) {
+
+			reqResParams.setLogisticOrgId(jsonUtil.extractValue(reqResParams
+					.getResponse().body().asString(),
+					"organization.organization_id"));
+			System.out.println("Setting of Org id for Logistic: "+reqResParams.getLogisticOrgId());
+		} else {
+			reqResParams.setVaultOrgId(jsonUtil.extractValue(reqResParams
+					.getResponse().body().asString(),
+					"organization.organization_id"));
+			System.out.println("Setting of Org id for Vault: "+reqResParams.getVaultOrgId());
+		}
+
 	}
 
 	// @When("^user send request to request code api using \"([^\"]*)\" with endpoint \"([^\"]*)\" and expects statusCode \"([^\"]*)\"$")

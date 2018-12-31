@@ -13,6 +13,80 @@ public class JsonReqResParams {
 	private String userName;
 	private String userId;
 	private String invitationId;
+	private String mineremailId;
+	private String refineremailId;
+	private String logisticemailId;
+	private String vaultemailId;
+	private String refinerOrgId;
+	private String minerOrgId;
+	private String vaultOrgId;
+	private String logisticOrgId;
+	
+	
+
+	public String getRefinerOrgId() {
+		return refinerOrgId;
+	}
+
+	public void setRefinerOrgId(String refinerOrgId) {
+		this.refinerOrgId = refinerOrgId;
+	}
+
+	public String getMinerOrgId() {
+		return minerOrgId;
+	}
+
+	public void setMinerOrgId(String minerOrgId) {
+		this.minerOrgId = minerOrgId;
+	}
+
+	public String getVaultOrgId() {
+		return vaultOrgId;
+	}
+
+	public void setVaultOrgId(String vaultOrgId) {
+		this.vaultOrgId = vaultOrgId;
+	}
+
+	public String getLogisticOrgId() {
+		return logisticOrgId;
+	}
+
+	public void setLogisticOrgId(String logisticOrgId) {
+		this.logisticOrgId = logisticOrgId;
+	}
+
+	public String getMineremailId() {
+		return mineremailId;
+	}
+
+	public void setMineremailId(String mineremailId) {
+		this.mineremailId = mineremailId;
+	}
+
+	public String getRefineremailId() {
+		return refineremailId;
+	}
+
+	public void setRefineremailId(String refineremailId) {
+		this.refineremailId = refineremailId;
+	}
+
+	public String getLogisticemailId() {
+		return logisticemailId;
+	}
+
+	public void setLogisticemailId(String logisticemailId) {
+		this.logisticemailId = logisticemailId;
+	}
+
+	public String getVaultemailId() {
+		return vaultemailId;
+	}
+
+	public void setVaultemailId(String vaultemailId) {
+		this.vaultemailId = vaultemailId;
+	}
 
 	public String getInvitationId() {
 		return invitationId;
