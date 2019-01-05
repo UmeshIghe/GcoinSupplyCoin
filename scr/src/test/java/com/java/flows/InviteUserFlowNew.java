@@ -91,4 +91,10 @@ public class InviteUserFlowNew {
 				"user/{{user_id}}/invitation/{{invitaion_id}}", "201");
 
 	}
+
+	@Test
+	public void LinkPartnersToEacOther() {
+		steps.user_links_miner_and_refiner("Miner", "organizationid",
+				"Refiner,Vault,Logistic", "201");
+	}
 }

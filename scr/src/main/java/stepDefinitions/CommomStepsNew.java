@@ -1,6 +1,8 @@
 package stepDefinitions;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
@@ -8,6 +10,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 
+import apiRequests.LinkPartners;
 import utils.DateUtils;
 import utils.JsonReqResParams;
 import utils.JsonUtil;
@@ -179,24 +182,88 @@ public class CommomStepsNew {
 			reqResParams.setRefinerOrgId(jsonUtil.extractValue(reqResParams
 					.getResponse().body().asString(),
 					"organization.organization_id"));
-			System.out.println("Setting of Org id for Refiner: "+reqResParams.getRefinerOrgId());
+			System.out.println("Setting of Org id for Refiner: "
+					+ reqResParams.getRefinerOrgId());
 		} else if (orgType.contains("Miner")) {
 
 			reqResParams.setMinerOrgId(jsonUtil.extractValue(reqResParams
 					.getResponse().body().asString(),
 					"organization.organization_id"));
-			System.out.println("Setting of Org id for Miner: "+reqResParams.getMinerOrgId());
+			System.out.println("Setting of Org id for Miner: "
+					+ reqResParams.getMinerOrgId());
 		} else if (orgType.contains("Logistic")) {
 
 			reqResParams.setLogisticOrgId(jsonUtil.extractValue(reqResParams
 					.getResponse().body().asString(),
 					"organization.organization_id"));
-			System.out.println("Setting of Org id for Logistic: "+reqResParams.getLogisticOrgId());
+			System.out.println("Setting of Org id for Logistic: "
+					+ reqResParams.getLogisticOrgId());
 		} else {
 			reqResParams.setVaultOrgId(jsonUtil.extractValue(reqResParams
 					.getResponse().body().asString(),
 					"organization.organization_id"));
-			System.out.println("Setting of Org id for Vault: "+reqResParams.getVaultOrgId());
+			System.out.println("Setting of Org id for Vault: "
+					+ reqResParams.getVaultOrgId());
+		}
+
+	}
+
+	public void user_links_miner_and_refiner(String orgType, String endPoint,
+			String partners, String statusCode) {
+		// TODO Auto-generated method stub
+		reqResParams.setMinerOrgId("minerOrgId");
+		reqResParams.setRefinerOrgId("refinerOrgId");
+		reqResParams.setVaultOrgId("vaultOrgId");
+		reqResParams.setLogisticOrgId("logisticOrgId");
+
+		String orgTypeID = getOrgTypeId(orgType);
+		if (orgTypeID != null) {
+			endPoint = endPoint + "/" + orgTypeID;
+			System.out.println("Sending request to : " + endPoint);
+			List<String> partToAdd = new ArrayList<>();
+			if (partners.contains(",")) {
+				String[] partArr = partners.split(",");
+
+				for (String partType : partArr) {
+					partToAdd.add(getOrgTypeId(partType));
+
+				}
+
+			} else {
+				partToAdd.add(partners);
+			}
+
+			LinkPartners obj = new LinkPartners(partToAdd);
+			try {
+				String apiBody = objectMapper.writeValueAsString(obj);
+
+				String updatedRequest = jsonUtil
+						.updateJasonFileWithUserInputList(apiBody, "", "");
+
+				reqResParams.setUpdatedReq(updatedRequest);
+				reqResParams.setResponse(jsonUtil.postRequestWithAuth(
+						reqResParams.getUpdatedReq(), endPoint, statusCode,
+						reqResParams.getJwtAuth()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	private String getOrgTypeId(String orgType) {
+		// TODO Auto-generated method stub
+		if ("Miner".equalsIgnoreCase(orgType)) {
+			return reqResParams.getMinerOrgId();
+		} else if ("Refiner".equalsIgnoreCase(orgType)) {
+			return reqResParams.getRefinerOrgId();
+		} else if ("Logistic".equalsIgnoreCase(orgType)) {
+			return reqResParams.getLogisticOrgId();
+		} else if ("Vault".equalsIgnoreCase(orgType)) {
+			return reqResParams.getVaultOrgId();
+		} else {
+			return null;
 		}
 
 	}
@@ -300,4 +367,5 @@ public class CommomStepsNew {
 		}
 		return null;
 	}
+
 }
