@@ -211,10 +211,10 @@ public class CommomStepsNew {
 	public void user_links_miner_and_refiner(String orgType, String endPoint,
 			String partners, String statusCode) {
 		// TODO Auto-generated method stub
-		reqResParams.setMinerOrgId("minerOrgId");
-		reqResParams.setRefinerOrgId("refinerOrgId");
-		reqResParams.setVaultOrgId("vaultOrgId");
-		reqResParams.setLogisticOrgId("logisticOrgId");
+//		reqResParams.setMinerOrgId("minerOrgId");
+//		reqResParams.setRefinerOrgId("refinerOrgId");
+//		reqResParams.setVaultOrgId("vaultOrgId");
+//		reqResParams.setLogisticOrgId("logisticOrgId");
 
 		String orgTypeID = getOrgTypeId(orgType);
 		if (orgTypeID != null) {

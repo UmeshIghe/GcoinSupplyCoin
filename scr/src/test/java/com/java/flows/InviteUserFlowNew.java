@@ -12,7 +12,7 @@ public class InviteUserFlowNew {
 	@DataProvider(name = "typeOfUser")
 	public static Object[][] role() {
 		return new Object[][] { { "InviteUser", "user" },
-				{ "InviteUser", "admin" }, { "InviteOrg", "Refiner Operator" } };
+				{ "InviteUser", "admin" } };
 	}
 
 	@Test(dataProvider = "typeOfUser")
