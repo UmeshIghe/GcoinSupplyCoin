@@ -159,7 +159,7 @@ public class CommomStepsNew {
 			emailId = "Scrinviteuser+" + userName + "@gmail.com";
 			reqResParams.setVaultemailId(emailId);
 		}
-
+		reqResParams.setEmailId(emailId);
 		reqResParams.setUserName(userName);
 		String updatedRequest = jsonUtil.updateJasonFileWithUserInputList(
 				getRequestObjectMapper(apiClassName),
