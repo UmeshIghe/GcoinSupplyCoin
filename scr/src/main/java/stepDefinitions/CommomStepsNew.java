@@ -230,7 +230,7 @@ public class CommomStepsNew {
 				}
 
 			} else {
-				partToAdd.add(partners);
+				partToAdd.add(getOrgTypeId(partners));
 			}
 
 			LinkPartners obj = new LinkPartners(partToAdd);
@@ -366,6 +366,21 @@ public class CommomStepsNew {
 			e.printStackTrace();
 		}
 		return null;
+	}
+		public static void user_creates_dore_product(String jsonFileName, String endPoint, String statusCode) {
+
+		String updatedRequest = jsonUtil.updateJsonFileWithUserInputList(jsonFileName, "company_prefix",
+				reqResParams.getCompanyPrefix());
+		String referenceNo = RandomStringUtils.randomNumeric(7);
+
+		updatedRequest = jsonUtil.updateJsonFileWithUserInputList(updatedRequest, "display_name", "Dore" + referenceNo);
+
+		updatedRequest = jsonUtil.updateJsonFileWithUserInputList(updatedRequest,
+				"shared_properties.['Item Reference Number']", referenceNo);
+		updatedRequest = jsonUtil.updateJsonFileWithUserInputList(updatedRequest, "item_reference", referenceNo);
+
+		reqResParams.setUpdatedReq(updatedRequest);
+		reqResParams.setResponse(jsonUtil.postRequestWithAuth(reqResParams.getUpdatedReq(), endPoint, statusCode,reqResParams.getJwtAuth()));
 	}
 
 }
