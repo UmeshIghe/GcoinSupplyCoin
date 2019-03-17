@@ -1,4 +1,4 @@
-package com.mastercard.driver;
+package com.scr.responsiblegold.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,11 +10,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ScannerExample {
-	public static void main(String[] args) throws IOException {
+//	public static void main(String[] args) throws IOException {
+	public static void headerVerify(String response) {
 	
-  //Here content should be response , for trial i have given file path this has to be removed
-		String content = new String(Files.readAllBytes(Paths.get("C:\\\\Users\\\\e070376\\\\eclipse-workspace\\\\TechnicalWriter\\\\src\\\\main\\\\resources\\\\chromeDriver\\\\response.csv")));
+//		String content = new String(Files.readAllBytes(Paths.get("C:\\\\Users\\\\e070376\\\\eclipse-workspace\\\\TechnicalWriter\\\\src\\\\main\\\\resources\\\\chromeDriver\\\\response.csv")));
 		// Get scanner instance
+	
+		String content = response;
 		Scanner scanner = new Scanner(content);
 
 		// Set the delimiter used in file
@@ -26,7 +28,6 @@ public class ScannerExample {
 //			System.out.print(scanner.nextLine());
 			String alpha = scanner.nextLine();
 			List<String> result = Arrays.asList(alpha.split("\\s*,\\s*"));
-      //REsult holds all the header
 			for (String col : result) {
 				System.out.println(col);
 			}
