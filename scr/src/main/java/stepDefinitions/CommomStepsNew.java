@@ -382,5 +382,8 @@ public class CommomStepsNew {
 		reqResParams.setUpdatedReq(updatedRequest);
 		reqResParams.setResponse(jsonUtil.postRequestWithAuth(reqResParams.getUpdatedReq(), endPoint, statusCode,reqResParams.getJwtAuth()));
 	}
+	public static void verifyHeaders(String expcsvheaders) {
+		ScannerExample.headerVerify(reqResParams.getResponse().body().asString(), expcsvheaders);
+	}
 
 }
