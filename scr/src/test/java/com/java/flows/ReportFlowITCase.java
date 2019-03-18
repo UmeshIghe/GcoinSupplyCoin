@@ -20,7 +20,7 @@ public class ReportFlowITCase {
 
 	ReportAuth username = new ReportAuth();
 	String email = username.getUsername();
-	public static final String CSVHEADERS = "Organization 1Name,Company Prefix, Product Type,Serial Number,SGTIN,Weight,Au%,Ag%,Impurity%, pbk.rsa, Creation Date, Acceptance Date,Registration Date,Transfer out Date, Re-chip Timestamp,Re-chip Message,Re-chip User,Reject Timestamp,Reject Message,Reject User";
+	public static final String CSVHEADERS = "Organization Name,Company Prefix, Product Type,Serial Number,SGTIN,Weight,Au%,Ag%,Impurity%, pbk.rsa, Creation Date, Acceptance Date,Registration Date,Transfer out Date, Re-chip Timestamp,Re-chip Message,Re-chip User,Reject Timestamp,Reject Message,Reject User";
 
 	@Test(dataProvider = "typeOfTemplate", priority = 1)
 	public void testReportGeneration(String apiClassName, String templateType) {
