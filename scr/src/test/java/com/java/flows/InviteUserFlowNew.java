@@ -62,7 +62,7 @@ public class UserInviteFlowITCase {
 		CommomStepsNew.user_send_get_request_to_api_with_authId_as_header_with_parameter_and_expects_statusCode(
 				"organization", "organizationid", "200");
 		
-		CommomStepsNew.user_creates_dore_product("doreProduct.json", "product", "201");
+		CommomStepsNew.user_creates_dore_product("DoreProducts", "product", "201");
 
 	}
 //		System.out.println("UserInviteFlowITCase: testUserInviteFlow() START");
