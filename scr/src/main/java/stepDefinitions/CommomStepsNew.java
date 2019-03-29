@@ -422,5 +422,12 @@ public final class CommomStepsNew {
 	public static void verifyHeaders(String expcsvheaders) {
 		ScannerExample.headerVerify(reqResParams.getResponse().body().asString(), expcsvheaders);
 	}
+	public static void user_retires_product(String statusCode, String endPoint) {
+
+		String productId = jsonUtil.extractValue(reqResParams.getResponse().body().asString(), "_id");
+		endPoint = "organization/" + reqResParams.getOrganizationid() + "/product/" + productId + "/" + endPoint;
+		System.out.println("Sending request to : " + endPoint);
+		jsonUtil.postRequestWithAuth("", endPoint, statusCode, reqResParams.getJwtAuth());
+	}
 
 }
