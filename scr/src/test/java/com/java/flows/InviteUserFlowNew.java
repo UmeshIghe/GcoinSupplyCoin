@@ -63,6 +63,8 @@ public class UserInviteFlowITCase {
 				"organization", "organizationid", "200");
 		
 		CommomStepsNew.user_creates_dore_product("DoreProducts", "product", "201");
+		CommomStepsNew.user_retires_product("201","retire");
+		CommomStepsNew.user_retires_product("201","restore");
 
 	}
 //		System.out.println("UserInviteFlowITCase: testUserInviteFlow() START");
